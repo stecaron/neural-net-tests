@@ -15,6 +15,7 @@ import time
 from datetime import timedelta
 from tqdm import tqdm
 
+#torch.set_num_threads(8) 
 
 class DynamicNet(torch.nn.Module):
     def __init__(self):
@@ -70,10 +71,9 @@ for t in tqdm(range(5000000)):
 
     # Compute and print loss
     loss = criterion(y_pred, y)
-    if t % 2000 == 1999:
-        print(t, loss.item())
 
     # Zero gradients, perform a backward pass, and update the weights.
+    # print(torch.get_num_threads())
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
